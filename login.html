@@ -1,1 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول - الأستاذ AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ============================================================
+           أنماط خاصة بصفحة تسجيل الدخول
+           ============================================================ */
+        .login-page {
+            min-height: calc(100vh - 250px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--off-white) 0%, #e8ecf1 100%);
+        }
 
+        .login-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-hover);
+            padding: 45px 40px;
+            max-width: 440px;
+            width: 100%;
+            transition: var(--transition);
+            border-top: 5px solid var(--gold);
+        }
+
+        .login-card:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .login-header .login-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .login-header p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .login-header p a {
+            color: var(--primary-blue);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-header p a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== نموذج تسجيل الدخول ===== */
+        .login-form .form-group {
+            margin-bottom: 22px;
+        }
+
+        .login-form label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .login-form label i {
+            margin-left: 8px;
+            color: var(--primary-blue);
+        }
+
+        .login-form .input-wrapper {
+            position: relative;
+        }
+
+        .login-form .input-wrapper input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            transition: var(--transition);
+            background: var(--off-white);
+            color: var(--dark);
+            direction: ltr;
+        }
+
+        .login-form .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(26, 58, 106, 0.08);
+        }
+
+        .login-form .input-wrapper input::placeholder {
+            color: var(--gray);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* ===== خيارات إضافية ===== */
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0 28px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .login-options .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .login-options .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .login-options .forgot-link {
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-options .forgot-link:hover {
+            color: var(--gold);
+        }
+
+        /* ===== أزرار ===== */
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 58, 106, 0.3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* ===== فصل ===== */
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-light);
+        }
+
+        .login-divider span {
+            color: var(--gray);
+            font-size: 0.85rem;
+            padding: 0 6px;
+            white-space: nowrap;
+        }
+
+        /* ===== زر الزائر ===== */
+        .btn-guest {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-guest:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* ===== رسائل التنبيه ===== */
+        .alert-message {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-message.error {
+            display: flex;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-message.success {
+            display: flex;
+            background: #dcfce7;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* ===== التجاوب ===== */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .login-form .input-wrapper input {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+
+            .login-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .login-options .forgot-link {
+                align-self: flex-start;
+            }
+
+            .btn-login {
+                padding: 14px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- الشريط العلوي (Navbar)                                        -->
+    <!-- ============================================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧑‍🏫</span>
+                الأستاذ <span class="logo-highlight">AI</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="chapters.html">الشبيترات</a></li>
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="login.html" class="btn-nav-login">تسجيل الدخول</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- المحتوى الرئيسي                                               -->
+    <!-- ============================================================ -->
+    <main class="login-page">
+        <div class="login-card">
+
+            <!-- رأس البطاقة -->
+            <div class="login-header">
+                <span class="login-icon">🧑‍🏫</span>
+                <h1>مرحباً بعودتك</h1>
+                <p>
+                    سجل دخولك لمتابعة تعلمك
+                    <br />
+                    <a href="signup.html">ليس لديك حساب؟ سجل الآن</a>
+                </p>
+            </div>
+
+            <!-- رسالة التنبيه -->
+            <div id="alertMessage" class="alert-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="alertText"></span>
+            </div>
+
+            <!-- نموذج تسجيل الدخول -->
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" placeholder="example@email.com" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="••••••••" required />
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe" />
+                        تذكرني
+                    </label>
+                    <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+
+            <!-- الفاصل -->
+            <div class="login-divider">
+                <span>أو</span>
+            </div>
+
+            <!-- زر الدخول كزائر -->
+            <button class="btn-guest" id="guestLogin">
+                <i class="fas fa-user"></i> دخول كزائر (تجريبي)
+            </button>
+
+        </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- التذييل (Footer)                                              -->
+    <!-- ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🧑‍🏫</span>
+                    <span>الأستاذ AI</span>
+                    <p>منصة تعليمية ذكية للمراحل التعليمية في موريتانيا.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="chapters.html">الشبيترات</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>التواصل</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> البريد الإلكتروني</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> واتساب</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 الأستاذ AI. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- جافا سكريبت                                                   -->
+    <!-- ============================================================ -->
+    <script src="js/script.js"></script>
+    <script>
+        // ============================================================
+        // 1. تفعيل قائمة الجوال (هامبرغر)
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                });
+            }
+        });
+
+        // ============================================================
+        // 2. معالجة نموذج تسجيل الدخول
+        // ============================================================
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const alertMessage = document.getElementById('alertMessage');
+            const alertText = document.getElementById('alertText');
+
+            // إخفاء أي رسالة سابقة
+            alertMessage.className = 'alert-message';
+
+            // التحقق من الحقول
+            if (!email || !password) {
+                alertMessage.className = 'alert-message error';
+                alertText.textContent = '⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور';
+                return;
+            }
+
+            // محاكاة التحقق (أي بريد وكلمة مرور طولها 6 أو أكثر)
+            if (password.length < 6) {
+                alertMessage.className = 'alert-message error';
+                alertText.textContent = '⚠️ كلمة المرور يجب أن تكون 6 محارف على الأقل';
+                return;
+            }
+
+            // ==== تسجيل الدخول ناجح (محاكاة) ====
+            // تخزين بيانات المستخدم في localStorage
+            const userData = {
+                name: email.split('@')[0], // استخراج الاسم من البريد
+                email: email,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // رسالة نجاح
+            alertMessage.className = 'alert-message success';
+            alertText.textContent = '✅ تم تسجيل الدخول بنجاح! جاري التحويل...';
+
+            // الانتقال إلى لوحة التحكم بعد 1.5 ثانية
+            setTimeout(function() {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        });
+
+        // ============================================================
+        // 3. الدخول كزائر (تجريبي)
+        // ============================================================
+        document.getElementById('guestLogin').addEventListener('click', function() {
+            // تخزين بيانات زائر
+            const guestData = {
+                name: 'زائر',
+                email: 'guest@example.com',
+                isGuest: true,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('user', JSON.stringify(guestData));
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // الانتقال إلى لوحة التحكم
+            window.location.href = 'dashboard.html';
+        });
+
+        // ============================================================
+        // 4. التحقق من وجود جلسة نشطة (توجيه تلقائي)
+        // ============================================================
+        // إذا كان المستخدم مسجل الدخول بالفعل، حوله إلى لوحة التحكم
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+  </html>
