@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفاصيل الشبيتر - الأستاذ AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* أنماط خاصة بهذه الصفحة فقط */
+        .detail-header {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 35px 30px;
+            box-shadow: var(--shadow);
+            margin: 30px 0 40px;
+            border-top: 5px solid var(--primary-blue);
+        }
+        .detail-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .detail-header-top > div:first-child {
+            flex: 1;
+            min-width: 250px;
+        }
+        .detail-level-badge {
+            display: inline-block;
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .detail-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+        .detail-description {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+        .detail-price-box {
+            background: var(--off-white);
+            padding: 25px 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            min-width: 200px;
+            border: 2px solid var(--gray-light);
+        }
+        .detail-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: block;
+        }
+        .detail-price-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: block;
+            margin: 4px 0 15px;
+        }
+        .btn-purchase {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+        }
+        .detail-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-light);
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        .stat-item i {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+        .lessons-list {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .lessons-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lessons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            background: var(--off-white);
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .lesson-item:hover {
+            background: var(--white);
+            border-color: var(--gray-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .lesson-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray);
+            min-width: 32px;
+            text-align: center;
+        }
+        .lesson-info {
+            flex: 1;
+        }
+        .lesson-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+        .lesson-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .lesson-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            border-radius: 30px;
+        }
+        .chapter-not-found {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .chapter-not-found h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin: 15px 0 10px;
+        }
+        .chapter-not-found p {
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+        @media (max-width: 768px) {
+            .detail-header-top { flex-direction: column; }
+            .detail-price-box { width: 100%; }
+            .detail-title { font-size: 1.6rem; }
+            .detail-stats { gap: 15px; }
+            .stat-item { font-size: 0.85rem; }
+            .lesson-item { flex-wrap: wrap; gap: 10px; }
+            .lesson-info { width: 100%; order: 2; }
+            .lesson-item .btn-sm { order: 3; width: 100%; text-align: center; }
+            .lesson-number { order: 1; }
+        }
+        @media (max-width: 480px) {
+            .detail-header { padding: 20px 15px; }
+            .detail-title { font-size: 1.3rem; }
+            .detail-description { font-size: 0.95rem; }
+            .detail-price { font-size: 1.6rem; }
+            .lessons-list { padding: 20px 15px; }
+            .lessons-title { font-size: 1.2rem; }
+            .lesson-meta { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
 
+    <!-- الشريط العلوي -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧑‍🏫</span>
+                الأستاذ <span class="logo-highlight">AI</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="chapters.html" class="active">الشبيترات</a></li>
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="login.html" class="btn-nav-login">تسجيل الدخول</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <section class="chapter-detail-section">
+            <div class="container">
+                <div id="chapterDetailContent"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🧑‍🏫</span>
+                    <span>الأستاذ AI</span>
+                    <p>منصة تعليمية ذكية للمراحل التعليمية في موريتانيا.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="chapters.html">الشبيترات</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>التواصل</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> البريد الإلكتروني</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> واتساب</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 الأستاذ AI. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ملفات الجافا سكريبت -->
+    <script src="js/script.js"></script>
+    <script>
+        // ============================================================
+        // البيانات الوهمية للشبيترات (مكررة هنا لتكامل الملف)
+        // ============================================================
+        const chaptersData = [
+            { id: 1, level: 1, title: 'المعادلات من الدرجة الأولى', description: 'تعلم حل المعادلات البسيطة والمركبة مع تطبيقات عملية.', lessonsCount: 8, price: 500, icon: '📐', color: '#4a90d9' },
+            { id: 2, level: 1, title: 'الهندسة الأساسية', description: 'المثلثات، الزوايا، والمضلعات مع تمارين متنوعة.', lessonsCount: 6, price: 450, icon: '📏', color: '#4a90d9' },
+            { id: 3, level: 1, title: 'الإحصاء والبيانات', description: 'جمع البيانات، تمثيلها بيانياً، وتحليلها بشكل مبسط.', lessonsCount: 5, price: 400, icon: '📊', color: '#4a90d9' },
+            { id: 4, level: 2, title: 'المعادلات والمتراجحات', description: 'حل المعادلات والمتراجحات من الدرجة الأولى والثانية.', lessonsCount: 10, price: 600, icon: '⚖️', color: '#27ae60' },
+            { id: 5, level: 2, title: 'الهندسة الفضائية', description: 'المكعبات، الأسطوانات، والكرات مع حسابات الحجوم والمساحات.', lessonsCount: 8, price: 550, icon: '🌐', color: '#27ae60' },
+            { id: 6, level: 2, title: 'الاحتمالات والإحصاء', description: 'مفاهيم الاحتمالات، التوزيعات، وتحليل البيانات المتقدمة.', lessonsCount: 7, price: 500, icon: '🎲', color: '#27ae60' },
+            { id: 7, level: 3, title: 'النهايات والاشتقاق', description: 'مفهوم النهاية، الاشتقاق، وتطبيقاته في الدوال.', lessonsCount: 12, price: 750, icon: '📈', color: '#d4a847' },
+            { id: 8, level: 3, title: 'الدوال الأسية واللوغاريتمية', description: 'خصائص الدوال الأسية واللوغاريتمية مع تطبيقات عملية.', lessonsCount: 10, price: 700, icon: '📊', color: '#d4a847' },
+            { id: 9, level: 3, title: 'التكامل وتطبيقاته', description: 'مفاهيم التكامل، حساب المساحات، وتطبيقات في الفيزياء.', lessonsCount: 10, price: 700, icon: '∫', color: '#d4a847' }
+        ];
+
+        // ============================================================
+        // دالة عرض تفاصيل الشبيتر
+        // ============================================================
+        function renderChapterDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapterId = parseInt(urlParams.get('id'));
+            const container = document.getElementById('chapterDetailContent');
+            const chapter = chaptersData.find(ch => ch.id === chapterId);
+            
+            if (!chapter) {
+                container.innerHTML = `
+                    <div class="chapter-not-found">
+                        <span style="font-size: 4rem;">😕</span>
+                        <h2>عذراً، لم نجد هذا الشبيتر</h2>
+                        <p>قد يكون الرابط غير صحيح أو أن الشبيتر غير موجود</p>
+                        <a href="chapters.html" class="btn btn-primary" style="margin-top: 20px;">
+                            <i class="fas fa-arrow-right"></i> العودة إلى الشبيترات
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            const lessons = [
+                { id: 1, title: 'مقدمة في ' + chapter.title, duration: '12:30', isFree: true },
+                { id: 2, title: 'المفهوم الأساسي الأول', duration: '15:45', isFree: false },
+                { id: 3, title: 'تطبيقات عملية (1)', duration: '18:20', isFree: false },
+                { id: 4, title: 'المفهوم المتقدم', duration: '22:10', isFree: false },
+                { id: 5, title: 'تطبيقات عملية (2)', duration: '16:35', isFree: false },
+                { id: 6, title: 'مراجعة وتمارين شاملة', duration: '25:00', isFree: false }
+            ];
+
+            const levelName = chapter.level === 1 ? 'كونكور' : chapter.level === 2 ? 'إعدادية' : 'باكالوريا';
+            
+            let html = `
+                <div class="detail-header" style="border-top-color: ${chapter.color};">
+                    <div class="detail-header-top">
+                        <div>
+                            <span class="detail-level-badge" style="background: ${chapter.color};">${levelName}</span>
+                            <h1 class="detail-title">${chapter.icon} ${chapter.title}</h1>
+                            <p class="detail-description">${chapter.description}</p>
+                        </div>
+                        <div class="detail-price-box">
+                            <span class="detail-price">${chapter.price} أو.ق</span>
+                            <span class="detail-price-label">سعر الشبيتر</span>
+                            <button class="btn btn-primary btn-purchase" onclick="alert('سيتم تفعيل نظام الدفع قريباً!')">
+                                <i class="fas fa-shopping-cart"></i> شراء الآن
+                            </button>
+                        </div>
+                    </div>
+                    <div class="detail-stats">
+                        <div class="stat-item"><i class="fas fa-video"></i> <span>${chapter.lessonsCount} دروس</span></div>
+                        <div class="stat-item"><i class="fas fa-clock"></i> <span>${chapter.lessonsCount * 15} دقيقة</span></div>
+                        <div class="stat-item"><i class="fas fa-users"></i> <span>+${Math.floor(Math.random() * 100) + 20} طالب</span></div>
+                        <div class="stat-item"><i class="fas fa-star" style="color: var(--gold);"></i> <span>${(Math.random() * 1.5 + 3.5).toFixed(1)} / 5</span></div>
+                    </div>
+                </div>
+                <div class="lessons-list">
+                    <h2 class="lessons-title"><i class="fas fa-list-ul"></i> قائمة الدروس</h2>
+                    <div class="lessons-grid">
+            `;
+
+            lessons.forEach((lesson, index) => {
+                const isFree = lesson.isFree;
+                const statusIcon = isFree ? 'fa-play-circle' : 'fa-lock';
+                const statusColor = isFree ? '#27ae60' : 'var(--gray)';
+                const statusText = isFree ? 'معاينة مجانية' : 'مقفل';
+                html += `
+                    <div class="lesson-item">
+                        <div class="lesson-number">${String(index + 1).padStart(2, '0')}</div>
+                        <div class="lesson-info">
+                            <h4>${lesson.title}</h4>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> ${lesson.duration}</span>
+                                <span class="lesson-status" style="color: ${statusColor};">
+                                    <i class="fas ${statusIcon}"></i> ${statusText}
+                                </span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm ${isFree ? 'btn-primary' : 'btn-outline'}" 
+                                onclick="${isFree ? "alert('سيتم تشغيل الفيديو قريباً!')" : "alert('هذا الدرس مقفل، قم بشراء الشبيتر لفتحه')"}">
+                            ${isFree ? '<i class="fas fa-play"></i> تشغيل' : '<i class="fas fa-lock"></i>'}
+                        </button>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 40px 0 20px;">
+                    <a href="chapters.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-right"></i> العودة إلى جميع الشبيترات
+                    </a>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderChapterDetail();
+            // تفعيل قائمة الجوال
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                });
+            }
+        });
+    </script>
+</body>
+  </html>
