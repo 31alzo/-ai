@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الشبيترات - الأستاذ AI</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- ملف الأنماط -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
+    <!-- ============================================================ -->
+    <!-- 1. الشريط العلوي (Navbar)                                    -->
+    <!-- ============================================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧑‍🏫</span>
+                الأستاذ <span class="logo-highlight">AI</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="chapters.html" class="active">الشبيترات</a></li>
+                <li><a href="dashboard.html">لوحة التحكم</a></li>
+                <li><a href="login.html" class="btn-nav-login">تسجيل الدخول</a></li>
+            </ul>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- 2. المحتوى الرئيسي                                             -->
+    <!-- ============================================================ -->
+    <main>
+
+        <!-- ======== عنوان الصفحة ======== -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">📚 جميع الشبيترات التعليمية</h1>
+                <p class="page-subtitle">اختر مستواك وابدأ رحلة التعلم مع الأستاذ AI</p>
+            </div>
+        </section>
+
+        <!-- ======== أزرار التصفية (Filter) ======== -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-buttons" id="filterButtons">
+                    <button class="filter-btn active" data-level="all">الكل</button>
+                    <button class="filter-btn" data-level="1">🎯 كونكور</button>
+                    <button class="filter-btn" data-level="2">📗 إعدادية</button>
+                    <button class="filter-btn" data-level="3">📕 باكالوريا</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== قائمة الشبيترات ======== -->
+        <section class="chapters-section">
+            <div class="container">
+                <div class="chapters-grid" id="chaptersGrid">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- 3. التذييل (Footer)                                           -->
+    <!-- ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🧑‍🏫</span>
+                    <span>الأستاذ AI</span>
+                    <p>منصة تعليمية ذكية للمراحل التعليمية في موريتانيا.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="chapters.html">الشبيترات</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>التواصل</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> البريد الإلكتروني</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> واتساب</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 الأستاذ AI. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- 4. ملفات الجافا سكريبت                                         -->
+    <!-- ============================================================ -->
+    <script src="js/script.js"></script>
+    <script src="js/chapters.js"></script>
+</body>
+</html>
